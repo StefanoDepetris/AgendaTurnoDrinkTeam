@@ -10,8 +10,8 @@ public class Paciente {
      private String nombre;
      private Integer dni;
      private Long telefono;
-     private Boolean debe = false;
-     private FormaDePago miForma;
+     private Boolean debe = true;
+     private FormaDePago miForma = new TarjetaCredito();
 
     public Paciente () {
         crearPaciente();
@@ -45,6 +45,7 @@ public class Paciente {
         return  telefono;
     }
     public void pagarConsulta() {
+        debe = false;
         miForma.pagar();
     }
     public void setFdp(FormaDePago fdp ) {

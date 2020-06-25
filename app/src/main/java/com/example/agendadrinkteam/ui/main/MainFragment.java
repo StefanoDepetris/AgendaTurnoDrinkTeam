@@ -79,7 +79,7 @@ public class MainFragment extends Fragment {
                         dialogInterface.dismiss();
                     })
                     .setPositiveButton("Pagar",(dialogInterface, i) -> {
-
+                        mViewModel.agenda.pagar(item.getID());
                     })
                     .show();
         });

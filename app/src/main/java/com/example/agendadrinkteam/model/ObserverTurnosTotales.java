@@ -24,10 +24,10 @@ public class ObserverTurnosTotales implements Display, Observer {
 
     @Override
     public void update(){
-        if (turnos != miAgenda.cantidadTurnos()){
-            turnos = miAgenda.cantidadTurnos();
+        //if (turnos != miAgenda.cantidadTurnos()){
+          //  turnos = miAgenda.cantidadTurnos();
             display();
-        }
+        //}
     }
 
     @Override

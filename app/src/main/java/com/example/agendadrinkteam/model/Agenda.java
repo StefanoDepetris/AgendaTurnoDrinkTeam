@@ -105,6 +105,7 @@ public class Agenda implements Subject {
         Turno t = getTurno(i);
         try{
             t.pagarTurno();
+            notificar();
             return true;
         } catch (NullPointerException a){
             System.out.print("AGENDA: No existe el turno solicitado. No se realizo el pago.");

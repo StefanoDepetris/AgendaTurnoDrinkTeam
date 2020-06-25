@@ -43,8 +43,9 @@
         <DatePicker
             android:id="@+id/datePicker"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:datePickerMode="calendar"/>
+            android:layout_height="200dp"
+            android:datePickerMode="calendar"
+            />
 
 
     <EditText

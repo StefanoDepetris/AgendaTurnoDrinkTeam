@@ -18,19 +18,19 @@ public class Turno {
     //-------------------CONFIGURACION INICIAL (LO MISMO PARA TODAS LAS INSTANCIAS DE DIA)------------------------------
 
     static private ArrayList<Fecha> fechas;
-    static private Integer id;
+    private Integer id;
 
     static  {
         fechas = new ArrayList<>();
         fechas.add(new Fecha(LocalDate.now()));
-        id = 0;
+
     }  // ESTO SE HACE SOLO AL INICIO
 
 
     //------------------------------------CONSTRUCTOR-------------------------------------------------------------------
 
     public Turno () {
-        ++id;
+        id = new Random().nextInt();
         paciente = new Paciente();
         ausente=false;
     }
@@ -134,8 +134,8 @@ public class Turno {
 
     @Override
     public String toString(){
-
-        return "Paciente: " + paciente.getNombre() + ", Fecha: " + fecha + " a las " + hora;
+        String debe =  paciente.getDebe() ? "SI" : "NO";
+        return "Paciente: " + paciente.getNombre() + "\nFecha: " + fecha + " a las " + hora + "\nDebe: " + debe ;
     }
 
     //-----------------------------METODOS DE PRUEBA--------------------------------------------------------------------
