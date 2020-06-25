@@ -6,7 +6,10 @@
     android:padding="25dp"
     android:orientation="vertical"
     tools:context=".ui.main.CrearTurnoFragment">
-
+    <View
+        android:layout_width="1000dp"
+        android:layout_height="1dp"
+        />
    <TextView
        android:textSize="18sp"
        android:layout_width="match_parent"
@@ -33,6 +36,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Telefono"
+        />
+
+
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:datePickerMode="calendar"/>
+
+
+    <EditText
+        android:id="@+id/et_hora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hora en formato HH:MM"
         />
 
 

@@ -20,6 +20,7 @@ import com.example.agendadrinkteam.R;
 import com.example.agendadrinkteam.model.Agenda;
 import com.example.agendadrinkteam.model.ObserverTurnosTotales;
 import com.example.agendadrinkteam.model.Turno;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class MainFragment extends Fragment {
 
     private static final String TAG = "MainFragment";
     private MainViewModel mViewModel;
-
+    private List<Turno> listaTurno = new ArrayList<>();
 
 
     public static MainFragment newInstance() {
@@ -52,45 +53,41 @@ public class MainFragment extends Fragment {
 
         ObserverTurnosTotales observerTurnosTotales = new ObserverTurnosTotales(mViewModel.agenda,() -> {
 
-            List<String> lista = new ArrayList<>();
-            for (Turno turno : mViewModel.getListaTurno()) {
-                lista.add("Turno para: " + turno.getFecha() + " " + turno.getHora());
-            }
 
-            listView.setAdapter(new ArrayAdapter<String>(requireContext(),android.R.layout.simple_list_item_1,lista));
+            listaTurno = mViewModel.getListaTurno();
+
+            listView.setAdapter(new ArrayAdapter<>(requireContext(),android.R.layout.simple_list_item_1,listaTurno));
         });
 
-        mViewModel.addPaciente("hoasd","564","65465");
+        mViewModel.addPaciente("Juan Blanco","564","65465");
 
         mViewModel.crearTurno("2020-07-25", "12:00");
 
-        mViewModel.addPaciente("hoa","564","65465");
+        mViewModel.addPaciente("Martin Blasco","564","65465");
 
         mViewModel.crearTurno("2020-08-25", "12:00");
 
-        /*mViewModel.addPaciente("asdf","234","234");
-        mViewModel.crearTurno("2020-08-26", "12:00");*/
+        
+        listView.setOnItemClickListener((adapterView, view, pos, l) -> {
+            Turno item = listaTurno.get(pos);
 
+            new MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Turno")
+                    .setMessage(listaTurno.get(pos).toString())
+                    .setNegativeButton("Cancelar turno",(dialogInterface, i) -> {
+                        mViewModel.agenda.quitarTurno(item.getID());
+                        dialogInterface.dismiss();
+                    })
+                    .setPositiveButton("Pagar",(dialogInterface, i) -> {
 
-        Log.e(TAG, "onActivityCreated: cantidad de turnos creados:  " + mViewModel.getListaTurno().size() );
-
+                    })
+                    .show();
+        });
 
 
         requireView().findViewById(R.id.btn_add_turno).setOnClickListener(view -> {
             new CrearTurnoFragment().show(getParentFragmentManager(), "crearTurno");
         });
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-
-
-
-
-
 
     }
 }
