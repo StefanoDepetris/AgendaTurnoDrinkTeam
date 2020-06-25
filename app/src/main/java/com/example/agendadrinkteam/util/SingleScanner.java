@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class SingleScanner {
     public String input = "";
+    private SingleScanner() {}
 
     private static SingleScanner sSingleScanner = new SingleScanner();
 
