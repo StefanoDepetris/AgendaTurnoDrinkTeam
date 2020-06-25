@@ -132,10 +132,14 @@ public class Turno {
         borrarTurno();
     }
 
+    public void setFormaPago(FormaDePago formaPago) {
+        paciente.setFdp(formaPago);
+    }
+
     @Override
     public String toString(){
-        String debe =  paciente.getDebe() ? "SI" : "NO";
-        return "Paciente: " + paciente.getNombre() + "\nFecha: " + fecha + " a las " + hora + "\nDebe: " + debe ;
+        String debe = paciente.getDebe() ? "Debe: SI" : paciente.getFormaPago();
+        return "Paciente: " + paciente.getNombre() + "\nFecha: " + fecha + " a las " + hora + "\n " + debe ;
     }
 
     //-----------------------------METODOS DE PRUEBA--------------------------------------------------------------------

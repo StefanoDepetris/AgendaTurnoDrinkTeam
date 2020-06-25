@@ -57,7 +57,9 @@ public class Paciente {
     public Boolean getDebe() {
         return debe;
     }
-
+    public String getFormaPago() {
+        return miForma.toString();
+    }
 
 
 }

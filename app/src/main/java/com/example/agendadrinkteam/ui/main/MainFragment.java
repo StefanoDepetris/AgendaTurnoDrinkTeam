@@ -13,12 +13,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.agendadrinkteam.R;
 import com.example.agendadrinkteam.model.Agenda;
+import com.example.agendadrinkteam.model.Efectivo;
+import com.example.agendadrinkteam.model.FormaDePago;
 import com.example.agendadrinkteam.model.ObserverTurnosTotales;
+import com.example.agendadrinkteam.model.TarjetaCredito;
+import com.example.agendadrinkteam.model.TarjetaDebito;
 import com.example.agendadrinkteam.model.Turno;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -31,6 +38,7 @@ public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
     private MainViewModel mViewModel;
     private List<Turno> listaTurno = new ArrayList<>();
+    private FormaDePago mFormaDePago;
 
 
     public static MainFragment newInstance() {
@@ -79,6 +87,7 @@ public class MainFragment extends Fragment {
                         dialogInterface.dismiss();
                     })
                     .setPositiveButton("Pagar",(dialogInterface, i) -> {
+                        item.setFormaPago(mFormaDePago);
                         mViewModel.agenda.pagar(item.getID());
                     })
                     .show();
@@ -89,5 +98,35 @@ public class MainFragment extends Fragment {
             new CrearTurnoFragment().show(getParentFragmentManager(), "crearTurno");
         });
 
+
+        Spinner spinner =  requireView().findViewById(R.id.metodo_pago);
+        List<String> metodoPagoList = new ArrayList<>();
+        metodoPagoList.add("Tarjeta de crédito");
+        metodoPagoList.add("Tarjeta de débito");
+        metodoPagoList.add("Efectivo");
+        spinner.setAdapter(new ArrayAdapter<String>(requireContext(),android.R.layout.simple_list_item_1,metodoPagoList));
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                switch (pos) {
+                    case 0:
+                        mFormaDePago = new TarjetaCredito();
+                        break;
+                    case 1:
+                        mFormaDePago = new TarjetaDebito();
+                        break;
+                    case 2:
+                        mFormaDePago = new Efectivo();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 }

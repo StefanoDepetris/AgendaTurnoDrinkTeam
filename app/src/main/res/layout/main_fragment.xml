@@ -24,11 +24,24 @@
         android:layout_weight="1"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Método de pago"
+        />
+
+
+    <Spinner
+        android:id="@+id/metodo_pago"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <Button
         android:id="@+id/btn_add_turno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Añadir turno"
         />
+
 
 </LinearLayout>
